@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ybz.myWebsite.mapper.RelArticleAndTypeMapper">
+
+	<resultMap type="RelArticleAndType" id="RelArticleAndTypeResultMap">
+		<id column="id" property="id"/>
+		<result column="article_id" property="articleId"/>
+		<result column="article_type_id" property="articleTypeId"/>
+	</resultMap>
+	
+	<!-- 插入文章与文章类型的关系 -->
+	<insert id="insertRelArticleAndType" parameterType="RelArticleAndType">
+		insert into rel_article_article_type(article_id,article_type_id)
+		value(#{articleId},#{articleTypeId})
+	</insert>
+	
+	<!-- 删除某文章对应的所有关系 -->
+	<delete id="deleteRelArticleAndTypes" parameterType="int">
+		delete from rel_article_article_type where article_id = #{articleId}
+	</delete>
+</mapper>
