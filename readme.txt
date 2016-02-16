@@ -1,1 +1,0 @@
-该工程为springmvc+mybatis环境配置实验，为分页做准备
