@@ -1,0 +1,4 @@
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc\:mysql\://w.rdc.sae.sina.com.cn\:3307/app_yuanbuzhou?useUnicode\=true&characterEncoding\=utf8
+jdbc.username=3monwkyxzw
+jdbc.password=xx2j5353x24lllw3kxzmhzx5zmy120h1k5w4j1xx

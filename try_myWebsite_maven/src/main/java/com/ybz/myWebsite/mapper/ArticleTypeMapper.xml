@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ybz.myWebsite.mapper.ArticleTypeMapper">
+
+	<resultMap type="ArticleType" id="ArticleTypeResultMap">
+		<id column="id" property="id"/>
+		<result column="type_name" property="typeName"/>
+		<result column="description" property="description"/>
+	</resultMap>
+	
+	<resultMap type="ArticleTypeGroup" id="ArticleTypeGroupResultMap">
+		<result column="id" property="articleTypeId"/>
+		<result column="num" property="num"/>
+	</resultMap>
+	
+	<!-- 查询文章类型信息 -->
+	<select id="findArticleTypes" resultMap="ArticleTypeResultMap">
+		SELECT * FROM article_type
+	</select>
+	
+	<!-- 按id查询文章类型信息 -->
+	<select id="findArticleTypeById" parameterType="int" resultMap="ArticleTypeResultMap">
+		SELECT * FROM article_type WHERE id = #{id}
+	</select>
+	
+	<!-- 添加文章类型 -->
+	<insert id="insertArticleType" parameterType="ArticleType">
+	<!-- 将插入数据的自增主键（id）返回到articleType对象中 -->
+	<selectKey keyProperty="id" order="AFTER" resultType="int">
+	SELECT LAST_INSERT_ID()
+	</selectKey>
+		INSERT INTO article_type(type_name, description) VALUES (#{typeName}, #{description})
+	</insert>
+	
+	<!-- 更新文章类型信息 -->
+	<update id="updateArticleType" parameterType="ArticleType">
+		UPDATE article_type 
+		SET type_name = #{typeName}, description = #{description}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 删除文章类型信息 -->
+	<delete id="deleteArticleType" parameterType="int">
+		DELETE FROM article_type WHERE id = #{id}
+	</delete>
+	
+	<!-- 文章类型分组查询 -->
+	<select id="findArticleCountGroup" parameterType="java.util.Map" resultMap="ArticleTypeGroupResultMap">
+		SELECT
+			article_type.id,
+			COUNT(DISTINCT(article.id)) AS num
+		FROM
+			article,
+			article_type,
+			rel_article_article_type r
+		WHERE
+			article.id=r.article_id
+			AND article_type.id = r.article_type_id
+		<if test="state != null">
+			AND article.state = #{state}
+		</if>
+		GROUP BY article_type.id
+	</select>
+	
+	<!-- 根据文章id查询文章类型信息 -->
+	<select id="findArticleTypesByArticleId" parameterType="int" resultMap="ArticleTypeResultMap">
+		SELECT
+			article.id,
+			article_type.id AS article_type_id,
+			article_type.type_name,
+			article_type.description
+		FROM
+			article,
+			article_type,
+			rel_article_article_type r
+		WHERE article.id = #{id}
+		AND article.id = r.article_id
+		AND article_type.id = r.article_type_id
+	</select>
+	
+</mapper>

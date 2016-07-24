@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ybz.myWebsite.mapper.SurveyMapper" >
+  <resultMap id="BaseResultMap" type="com.ybz.myWebsite.po.Survey" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sender_name" property="senderName" jdbcType="VARCHAR" />
+    <result column="sender_ip" property="senderIP" jdbcType="VARCHAR" />
+    <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" />
+    <result column="survey_data" property="surveyData" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sender_name, sender_ip, submit_time, survey_data
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ybz.myWebsite.po.SurveyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from survey
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from survey
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from survey
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybz.myWebsite.po.SurveyExample" >
+    delete from survey
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybz.myWebsite.po.Survey" >
+    insert into survey (id, sender_name, sender_ip, 
+      submit_time, survey_data)
+    values (#{id,jdbcType=INTEGER}, #{senderName,jdbcType=VARCHAR}, #{senderIP,jdbcType=VARCHAR}, 
+      #{submitTime,jdbcType=TIMESTAMP}, #{surveyData,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybz.myWebsite.po.Survey" >
+    insert into survey
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="senderName != null" >
+        sender_name,
+      </if>
+      <if test="senderIP != null" >
+        sender_ip,
+      </if>
+      <if test="submitTime != null" >
+        submit_time,
+      </if>
+      <if test="surveyData != null" >
+        survey_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="senderName != null" >
+        #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="senderIP != null" >
+        #{senderIP,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="surveyData != null" >
+        #{surveyData,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybz.myWebsite.po.SurveyExample" resultType="java.lang.Integer" >
+    select count(*) from survey
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update survey
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.senderName != null" >
+        sender_name = #{record.senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.senderIP != null" >
+        sender_ip = #{record.senderIP,jdbcType=VARCHAR},
+      </if>
+      <if test="record.submitTime != null" >
+        submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.surveyData != null" >
+        survey_data = #{record.surveyData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update survey
+    set id = #{record.id,jdbcType=INTEGER},
+      sender_name = #{record.senderName,jdbcType=VARCHAR},
+      sender_ip = #{record.senderIP,jdbcType=VARCHAR},
+      submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      survey_data = #{record.surveyData,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybz.myWebsite.po.Survey" >
+    update survey
+    <set >
+      <if test="senderName != null" >
+        sender_name = #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="senderIP != null" >
+        sender_ip = #{senderIP,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="surveyData != null" >
+        survey_data = #{surveyData,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybz.myWebsite.po.Survey" >
+    update survey
+    set sender_name = #{senderName,jdbcType=VARCHAR},
+      sender_ip = #{senderIP,jdbcType=VARCHAR},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      survey_data = #{surveyData,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 新增 -->
+  <!-- 查询所有问卷（不包含问卷内容）（按时间降序） -->
+  <select id="selectWithoutContent" resultMap="BaseResultMap" >
+    select 
+    id, 
+	sender_name, 
+	sender_ip, 
+	submit_time
+    from survey
+    order by submit_time DESC
+  </select>
+</mapper>
