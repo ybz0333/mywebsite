@@ -53,16 +53,16 @@
 - 前端页面还有许多可以改进和优化的地方
 - 可以试用缓存技术和其它提高并发性、可用性的方案
 其它边想边做
-### 下面是网站的截图：
-首页
-![home](http://o8r9omg0x.bkt.clouddn.com/img/try_github/try_mywebsite_pages/home_sm.jpg)
-博客
-![home](http://o8r9omg0x.bkt.clouddn.com/img/try_github/mywebsite/blog_sm.jpg)
-实验室
-![home](http://o8r9omg0x.bkt.clouddn.com/img/try_github/mywebsite/laboratory_sm.jpg)
-聊天室
-![home](http://o8r9omg0x.bkt.clouddn.com/img/try_github/mywebsite/chatroom_sm.jpg)
-后台管理页面1
-![home](http://o8r9omg0x.bkt.clouddn.com/img/try_github/mywebsite/manage_article_sm.jpg)
-后台管理页面2
+### 下面是网站的截图：  
+首页  
+![home](http://o8r9omg0x.bkt.clouddn.com/img/try_github/try_mywebsite_pages/home_sm.jpg)  
+博客  
+![home](http://o8r9omg0x.bkt.clouddn.com/img/try_github/mywebsite/blog_sm.jpg)  
+实验室  
+![home](http://o8r9omg0x.bkt.clouddn.com/img/try_github/mywebsite/laboratory_sm.jpg)  
+聊天室  
+![home](http://o8r9omg0x.bkt.clouddn.com/img/try_github/mywebsite/chatroom_sm.jpg)  
+后台管理页面1  
+![home](http://o8r9omg0x.bkt.clouddn.com/img/try_github/mywebsite/manage_article_sm.jpg)  
+后台管理页面2  
 ![home](http://o8r9omg0x.bkt.clouddn.com/img/try_github/mywebsite/newArticle_sm.jpg)
